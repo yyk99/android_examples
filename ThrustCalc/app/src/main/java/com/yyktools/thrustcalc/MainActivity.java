@@ -66,6 +66,19 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void recordButtonPressed(View v) {
+        EditText diamW = (EditText) findViewById(R.id.diameter); /* D */
+        EditText pitchW = (EditText) findViewById(R.id.pitch);   /* E */
+        EditText rpmW = (EditText) findViewById(R.id.rpm);       /* F */
+        EditText bladesW = (EditText) findViewById(R.id.blades); /* G */
+
+        EditText hpOutW = (EditText) findViewById(R.id.hpOut);
+        EditText loadOutW = (EditText) findViewById(R.id.loadOut);
+
+        hpOutW.setText(String.format("...saved"));
+        loadOutW.setText(String.format("...in log file"));
+    }
+
     public void computeButtonPressed(View v) {
         EditText diamW = (EditText) findViewById(R.id.diameter); /* D */
         EditText pitchW = (EditText) findViewById(R.id.pitch);   /* E */
