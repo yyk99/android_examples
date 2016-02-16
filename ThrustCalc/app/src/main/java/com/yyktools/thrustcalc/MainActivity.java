@@ -82,6 +82,12 @@ public class MainActivity extends AppCompatActivity {
         EditText hpOutW = (EditText) findViewById(R.id.hpOut);
         EditText loadOutW = (EditText) findViewById(R.id.loadOut);
 
+        CVSWriter log = new CVSWriter("thrust_hp.cvs");
+        boolean ok = log.writeLine(String.format("%s,%s", hpOutW.getText().toString(), loadOutW.getText().toString()));
+        if(!ok) {
+            // TODO: pop-up error message
+        }
+
         hpOutW.setText(String.format("...saved"));
         loadOutW.setText(String.format("...in log file"));
     }
