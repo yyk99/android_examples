@@ -66,6 +66,13 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //
+    //  TODO: add memo field
+    //
+
+    //
+    // Save current record to the log file
+    //
     public void recordButtonPressed(View v) {
         EditText diamW = (EditText) findViewById(R.id.diameter); /* D */
         EditText pitchW = (EditText) findViewById(R.id.pitch);   /* E */
