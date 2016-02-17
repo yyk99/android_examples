@@ -7,3 +7,8 @@ ThrustCalc is a simple mobile application to compute model engine performance pa
 WHAT'S NEW:
 ==========
 Feb 17, 2016 - New logos (mushroom prop)
+
+
+
+--
+Yury Y. Kuznetsov
