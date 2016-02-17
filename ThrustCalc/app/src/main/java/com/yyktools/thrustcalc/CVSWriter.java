@@ -1,11 +1,21 @@
-package com.yyktools.thrustcalc;
-
-import android.os.Environment;
-
 /**
  * Created by yyk on 16/02/16.
  */
+
+package com.yyktools.thrustcalc;
+
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.util.Log;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class CVSWriter {
+    private File m_file;
+
     /* Checks if external storage is available for read and write */
     public boolean isExternalStorageWritable() {
         String state = Environment.getExternalStorageState();
@@ -27,11 +37,21 @@ public class CVSWriter {
 
     CVSWriter (String filename)
     {
-
+        m_file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), filename);
     }
 
     boolean writeLine(String txt)
     {
-        return true;
+        try {
+            FileWriter f = new FileWriter(m_file, true);
+            f.write(txt + "\n");
+            f.flush();
+            f.close();
+            return true;
+        }
+        catch (IOException e) {
+            String err = e.getMessage();
+            return false;
+        }
     }
 }
