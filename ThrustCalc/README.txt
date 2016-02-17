@@ -1,7 +1,7 @@
 README
 ======
 
-ThrustCalc is a simple mobile app to compute model engine performance parameters
+ThrustCalc is a simple mobile application to compute model engine performance parameters
 
 
 What's new:
