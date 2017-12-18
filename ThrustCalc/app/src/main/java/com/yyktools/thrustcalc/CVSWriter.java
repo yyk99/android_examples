@@ -15,6 +15,7 @@ import java.io.IOException;
 
 public class CVSWriter {
     private File m_file;
+    private String m_err;
 
     /* Checks if external storage is available for read and write */
     public boolean isExternalStorageWritable() {
@@ -50,8 +51,12 @@ public class CVSWriter {
             return true;
         }
         catch (IOException e) {
-            String err = e.getMessage();
+            m_err = e.getMessage();
             return false;
         }
+    }
+
+    String GetLastError() {
+        return m_err;
     }
 }
