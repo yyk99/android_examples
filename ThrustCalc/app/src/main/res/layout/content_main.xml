@@ -20,7 +20,7 @@
         android:id="@+id/diameter"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:hint="Diameter"
+        android:hint="@string/Diameter"
         android:textAlignment="textEnd" />
 
     <EditText
@@ -31,14 +31,14 @@
         android:id="@+id/pitch"
         android:layout_below="@+id/computeButton"
         android:layout_alignParentStart="true"
-        android:hint="Pitch"
+        android:hint="@string/Pitch"
         android:textAlignment="textEnd" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Compute"
+        android:text="@string/COMPUTE"
         android:id="@+id/computeButton"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
@@ -52,7 +52,7 @@
         android:id="@+id/rpm"
         android:layout_below="@+id/pitch"
         android:layout_alignParentStart="true"
-        android:hint="RPM"
+        android:hint="@string/RPM"
         android:textAlignment="textEnd" />
 
     <EditText
@@ -64,7 +64,7 @@
         android:layout_below="@+id/rpm"
         android:layout_alignParentStart="true"
         android:nestedScrollingEnabled="true"
-        android:hint="Number of blades"
+        android:hint="@string/NumberOfBlades"
         android:textAlignment="textEnd"
         android:layout_alignParentEnd="false" />
 
@@ -95,10 +95,21 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Record"
+        android:text="@string/RECORD"
         android:id="@+id/recordButton"
         android:layout_below="@+id/computeButton"
         android:layout_alignStart="@+id/computeButton"
         android:onClick="recordButtonPressed" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/About"
+        android:id="@+id/button"
+        android:layout_below="@+id/loadOut"
+        android:layout_alignEnd="@+id/recordButton"
+        android:layout_marginTop="82dp"
+        android:layout_alignStart="@+id/recordButton" />
 
 </RelativeLayout>

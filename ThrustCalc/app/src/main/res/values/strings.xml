@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">ThrustCalc</string>
     <string name="action_settings">Settings</string>
+    <string name="COMPUTE">COMPUTE</string>
+    <string name="RECORD">RECORD</string>
+    <string name="Diameter">Diameter</string>
+    <string name="RPM">RPM</string>
+    <string name="NumberOfBlades">Number of blades</string>
+    <string name="Pitch">Pitch</string>
+    <string name="About">About</string>
 </resources>

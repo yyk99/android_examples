@@ -140,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
                 // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
                 // app-defined int constant. The callback method gets the
                 // result of the request.
+                return;
             }
         }
 
