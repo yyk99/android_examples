@@ -106,10 +106,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/About"
-        android:id="@+id/button"
+        android:id="@+id/aboutButton"
         android:layout_below="@+id/loadOut"
         android:layout_alignEnd="@+id/recordButton"
         android:layout_marginTop="82dp"
-        android:layout_alignStart="@+id/recordButton" />
+        android:layout_alignStart="@+id/recordButton"
+        android:onClick="aboutButtonPressed" />
 
 </RelativeLayout>

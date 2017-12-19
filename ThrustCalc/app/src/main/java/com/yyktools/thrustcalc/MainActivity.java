@@ -220,6 +220,14 @@ public class MainActivity extends AppCompatActivity {
         _load = load;
     }
 
+    public void aboutButtonPressed(View v) {
+        EditText hpOutW = (EditText) findViewById(R.id.hpOut);
+        EditText loadOutW = (EditText) findViewById(R.id.loadOut);
+
+        hpOutW.setText(String.format("Version:"));
+        loadOutW.setText(String.format("2017/12/19.01"));
+    }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -233,7 +241,6 @@ public class MainActivity extends AppCompatActivity {
                 // TODO: If you have web page content that matches this app activity's content,
                 // make sure this auto-generated web page URL is correct.
                 // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
                 // TODO: Make sure this auto-generated app deep link URI is correct.
                 Uri.parse("android-app://com.yyktools.thrustcalc/http/host/path")
         );
@@ -252,7 +259,6 @@ public class MainActivity extends AppCompatActivity {
                 // TODO: If you have web page content that matches this app activity's content,
                 // make sure this auto-generated web page URL is correct.
                 // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
                 // TODO: Make sure this auto-generated app deep link URI is correct.
                 Uri.parse("android-app://com.yyktools.thrustcalc/http/host/path")
         );
