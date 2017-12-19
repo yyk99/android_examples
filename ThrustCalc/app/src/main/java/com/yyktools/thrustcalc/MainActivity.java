@@ -95,11 +95,12 @@ public class MainActivity extends AppCompatActivity {
                 );
         boolean ok = log.writeLine(log_line);
         if(!ok) {
-            // TODO: pop-up error message
+            hpOutW.setText(String.format("...failed"));
+            loadOutW.setText(String.format("...error..."));
+        } else {
+            hpOutW.setText(String.format("...saved"));
+            loadOutW.setText(String.format("...in log file"));
         }
-
-        hpOutW.setText(String.format("...saved"));
-        loadOutW.setText(String.format("...in log file"));
     }
 
     public void computeButtonPressed(View v) {
