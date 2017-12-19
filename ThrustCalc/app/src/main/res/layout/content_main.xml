@@ -65,7 +65,8 @@
         android:layout_alignParentStart="true"
         android:nestedScrollingEnabled="true"
         android:hint="Number of blades"
-        android:textAlignment="textEnd" />
+        android:textAlignment="textEnd"
+        android:layout_alignParentEnd="false" />
 
     <EditText
         android:layout_width="wrap_content"
