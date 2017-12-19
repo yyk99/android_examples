@@ -20,7 +20,8 @@
         android:id="@+id/diameter"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:hint="Diameter" />
+        android:hint="Diameter"
+        android:textAlignment="textEnd" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -30,7 +31,8 @@
         android:id="@+id/pitch"
         android:layout_below="@+id/computeButton"
         android:layout_alignParentStart="true"
-        android:hint="Pitch" />
+        android:hint="Pitch"
+        android:textAlignment="textEnd" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -50,7 +52,8 @@
         android:id="@+id/rpm"
         android:layout_below="@+id/pitch"
         android:layout_alignParentStart="true"
-        android:hint="RPM" />
+        android:hint="RPM"
+        android:textAlignment="textEnd" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -61,7 +64,8 @@
         android:layout_below="@+id/rpm"
         android:layout_alignParentStart="true"
         android:nestedScrollingEnabled="true"
-        android:hint="Number of blades" />
+        android:hint="Number of blades"
+        android:textAlignment="textEnd" />
 
     <EditText
         android:layout_width="wrap_content"

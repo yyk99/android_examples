@@ -16,7 +16,15 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+//import java.sql.Time;
+import java.util.Date;
+
 public class MainActivity extends AppCompatActivity {
+    private double _diam; /* D */
+    private double _pitch; /* E */
+    private double _rpm;  /* F */
+    private int _nBlades; /* G */
+    private double _load, _hp, _thrust, _speed;
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -66,14 +74,29 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void recordButtonPressed(View v) {
-        EditText diamW = (EditText) findViewById(R.id.diameter); /* D */
-        EditText pitchW = (EditText) findViewById(R.id.pitch);   /* E */
-        EditText rpmW = (EditText) findViewById(R.id.rpm);       /* F */
-        EditText bladesW = (EditText) findViewById(R.id.blades); /* G */
+    //
+    //  TODO: add memo field
+    //
 
+    //
+    // Save current record to the log file
+    //
+    public void recordButtonPressed(View v) {
         EditText hpOutW = (EditText) findViewById(R.id.hpOut);
         EditText loadOutW = (EditText) findViewById(R.id.loadOut);
+
+        Date now = new Date();
+
+        CVSWriter log = new CVSWriter("thrust_hp.csv");
+        String log_line = String.format("%s,%g,%g,%g,%d,%g,%g,%g,%g",
+                now.toString(),
+                _diam, _pitch, _rpm, _nBlades,
+                _hp, _thrust, _speed, _load
+                );
+        boolean ok = log.writeLine(log_line);
+        if(!ok) {
+            // TODO: pop-up error message
+        }
 
         hpOutW.setText(String.format("...saved"));
         loadOutW.setText(String.format("...in log file"));
@@ -95,20 +118,16 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             diam = Double.parseDouble(diamW.getText().toString());
-        } catch (Exception e) {
-        }
+        } catch (Exception e) { }
         try {
             pitch = Double.parseDouble(pitchW.getText().toString());
-        } catch (Exception e) {
-        }
+        } catch (Exception e) { }
         try {
             rpm = Double.parseDouble(rpmW.getText().toString());
-        } catch (Exception e) {
-        }
+        } catch (Exception e) { }
         try {
             nBlades = Integer.parseInt(bladesW.getText().toString());
-        } catch (Exception e) {
-        }
+        } catch (Exception e) { }
         bladesW.setText(Integer.toString(nBlades));
 
         double load, hp, thrust, speed;
@@ -129,6 +148,16 @@ public class MainActivity extends AppCompatActivity {
 
         hpOutW.setText(String.format("%.3fhp, %.2flbs, %.0fmph", hp, thrust, speed));
         loadOutW.setText(String.format("%.0f prop load", load));
+        // save input and results
+        _diam = diam;
+        _pitch = pitch;
+        _rpm = rpm;
+        _nBlades = nBlades;
+
+        _hp = hp;
+        _thrust = thrust;
+        _speed = speed;
+        _load = load;
     }
 
     @Override
