@@ -9,6 +9,9 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import android.widget.EditText;
+import android.widget.TextView;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -48,5 +51,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void aboutButtonPressed(View v) {
+        TextView hpOutW = (TextView) findViewById(R.id.textOut1);
+        TextView loadOutW = (TextView) findViewById(R.id.textOut2);
+
+        hpOutW.setText(String.format("Version:"));
+        loadOutW.setText(String.format("2017/12/20.01"));
     }
 }

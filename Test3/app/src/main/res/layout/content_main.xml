@@ -18,7 +18,7 @@
         android:inputType="numberDecimal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Diameter" />
+        android:hint="Diameter" />
 
     <EditText
         android:id="@+id/editPitch"
@@ -28,7 +28,7 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="numberDecimal"
-        android:text="Pitch"
+        android:hint="Pitch"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editDiam" />
 
@@ -40,7 +40,7 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="number"
-        android:text="RPM"
+        android:hint="RPM"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editPitch" />
 
@@ -52,7 +52,7 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="number"
-        android:text="Number of blades"
+        android:hint="Number of blades"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editRPM" />
 
@@ -83,6 +83,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="29dp"
         android:layout_marginTop="250dp"
+        android:onClick="aboutButtonPressed"
         android:text="@string/aboutTxt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btRecord" />
@@ -94,7 +95,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editBlades" />
+        app:layout_constraintTop_toBottomOf="@+id/editBlades"
+        tools:text="...info" />
 
     <TextView
         android:id="@+id/textOut2"
@@ -102,6 +104,7 @@
         android:layout_height="39dp"
         android:layout_marginStart="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textOut1" />
+        app:layout_constraintTop_toBottomOf="@+id/textOut1"
+        tools:text="...info" />
 
 </android.support.constraint.ConstraintLayout>
