@@ -225,7 +225,7 @@ public class MainActivity extends AppCompatActivity {
         EditText loadOutW = (EditText) findViewById(R.id.loadOut);
 
         hpOutW.setText(String.format("Version:"));
-        loadOutW.setText(String.format("2017/12/19.01"));
+        loadOutW.setText(String.format("2017/12/19.02"));
     }
 
     @Override
