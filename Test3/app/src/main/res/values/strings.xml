@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Test3</string>
+    <string name="action_settings">Settings</string>
+    <string name="computeTxt">COMPUTE</string>
+    <string name="recordTxt">RECORD</string>
+    <string name="aboutTxt">About</string>
+</resources>
