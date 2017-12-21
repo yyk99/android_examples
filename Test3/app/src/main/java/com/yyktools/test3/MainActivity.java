@@ -118,46 +118,47 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             diam = Double.parseDouble(diamW.getText().toString());
-        } catch (Exception e) { }
+        } catch (Exception e) {
+        }
         try {
             pitch = Double.parseDouble(pitchW.getText().toString());
-        } catch (Exception e) { }
+        } catch (Exception e) {
+        }
         try {
             rpm = Double.parseDouble(rpmW.getText().toString());
-        } catch (Exception e) { }
+        } catch (Exception e) {
+        }
         try {
             nBlades = Integer.parseInt(bladesW.getText().toString());
-        } catch (Exception e) { }
-        bladesW.setText(String.format(Locale.US,"%d", nBlades));
-
-        double load, hp, thrust, speed;
-        {
-            double H = -0.05 * nBlades * nBlades + 0.65 * nBlades - 0.1;
-            double I = pitch / diam;
-            double J = diam * diam * diam * diam * pitch;  // load =POWER(D36,4)*E36
-            load = J;
-            double K = pitch * 0.000947 * rpm; // speed (mph) =E36*0.000947*F36
-            speed = K;
-            // hp =(POWER(F36,3)*POWER(D36,5))/1000000000000000000*I36*7.143*G36/2
-            double L = Math.pow(rpm, 3) * Math.pow(diam, 5) / 1000000000000000000.0 * I * 7.143 * nBlades / 2;
-            hp = L;
-            // thrust(lds)  =(POWER(F36,2)*POWER(D36,4))/1000000000000*2.83*H36
-            double M = (Math.pow(rpm, 2) * Math.pow(diam, 4) / 1000000000000.0 * 2.83 * H);
-            thrust = M;
+        } catch (Exception e) {
         }
+        bladesW.setText(String.format(Locale.US, "%d", nBlades));
 
-        hpOutW.setText(String.format(Locale.US,"%.3fhp, %.2flbs, %.0fmph", hp, thrust, speed));
-        loadOutW.setText(String.format(Locale.US,"%.0f prop load", load));
-        // save input and results
-        _diam = diam;
-        _pitch = pitch;
-        _rpm = rpm;
-        _nBlades = nBlades;
+        ThrustCalculator tc = new ThrustCalculator();
+        try {
+            tc.calculate(diam, pitch, rpm, nBlades);
+            double load, hp, thrust, speed;
+            load = tc.getLoad();
+            thrust = tc.getThrust();
+            hp = tc.getHp();
+            speed = tc.getSpeed();
 
-        _hp = hp;
-        _thrust = thrust;
-        _speed = speed;
-        _load = load;
+            hpOutW.setText(String.format(Locale.US, "%.3fhp, %.2flbs, %.0fmph", hp, thrust, speed));
+            loadOutW.setText(String.format(Locale.US, "%.0f prop load", load));
+            // save input and results
+            _diam = diam;
+            _pitch = pitch;
+            _rpm = rpm;
+            _nBlades = nBlades;
+
+            _hp = hp;
+            _thrust = thrust;
+            _speed = speed;
+            _load = load;
+        } catch (RuntimeException ex) {
+            hpOutW.setText(String.format(Locale.US, "Calculation failed"));
+            loadOutW.setText(String.format(Locale.US, "Err: %s", ex.getMessage()));
+        }
     }
 
     public void recordButtonPressed(View v) {
