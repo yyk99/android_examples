@@ -15,10 +15,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="17dp"
         android:ems="10"
+        android:hint="@string/diameter_hint"
         android:inputType="numberDecimal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:hint="Diameter" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editPitch"
@@ -27,8 +27,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:ems="10"
+        android:hint="@string/pitch_hint"
         android:inputType="numberDecimal"
-        android:hint="Pitch"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editDiam" />
 
@@ -39,8 +39,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:ems="10"
+        android:hint="@string/rpm_hint"
         android:inputType="number"
-        android:hint="RPM"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editPitch" />
 
@@ -51,8 +51,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:ems="10"
+        android:hint="@string/number_of_blades_hint"
         android:inputType="number"
-        android:hint="Number of blades"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editRPM" />
 
@@ -74,6 +74,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="29dp"
         android:layout_marginTop="8dp"
+        android:onClick="recordButtonPressed"
         android:text="@string/recordTxt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btCompute" />
