@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">List</string>
+    <string name="action_settings">Settings</string>
+    <string name="list_button">List</string>
+</resources>
