@@ -13,10 +13,15 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.ListView;
 import java.io.File;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    private ArrayList<String> _lines = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,9 +126,17 @@ public class MainActivity extends AppCompatActivity {
             if(f.endsWith(".csv")) {
                 buffer.append(f);
                 buffer.append('\n');
+                _lines.add(f);
             }
         }
         txtView.setText(buffer.toString());
+        {
+            ListView lst = (ListView) findViewById(R.id.listView);
+
+            ArrayAdapter<String> adapter;
+            adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, _lines);
+            lst.setAdapter(adapter);
+        }
     }
 }
 
