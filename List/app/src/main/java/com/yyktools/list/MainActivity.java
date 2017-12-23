@@ -113,30 +113,26 @@ public class MainActivity extends AppCompatActivity {
 
     public void listButtonPressed(View v) {
         TextView txtView = (TextView) findViewById(R.id.textView);
+        ListView listView = (ListView) findViewById(R.id.listView);
 
-        if(!isExternalStorageReadable()) {
+        if (!isExternalStorageReadable()) {
             /* permission will be requested */
             return;
         }
 
         File folder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-        String [] files = folder.list();
-        StringBuilder buffer = new StringBuilder();
-        for (String f : files) {
-            if(f.endsWith(".csv")) {
-                buffer.append(f);
-                buffer.append('\n');
-                _lines.add(f);
+        File[] files = folder.listFiles();
+        _lines.clear();
+        for (File f : files) {
+            String fn = f.getName();
+            if (fn.endsWith(".csv")) {
+                _lines.add(fn);
             }
         }
-        txtView.setText(buffer.toString());
-        {
-            ListView lst = (ListView) findViewById(R.id.listView);
 
-            ArrayAdapter<String> adapter;
-            adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, _lines);
-            lst.setAdapter(adapter);
-        }
+        ArrayAdapter<String> adapter;
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, _lines);
+        listView.setAdapter(adapter);
     }
 }
 
