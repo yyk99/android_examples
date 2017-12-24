@@ -1,4 +1,4 @@
-package com.yyktools.test3;
+package com.yyktools.thrustcalc2;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

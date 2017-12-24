@@ -1,4 +1,4 @@
-package com.yyktools.test3;
+package com.yyktools.thrustcalc2;
 
 public class ThrustCalculator {
     private double load, hp, thrust, speed;

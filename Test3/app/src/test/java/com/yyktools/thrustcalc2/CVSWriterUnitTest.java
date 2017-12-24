@@ -1,4 +1,4 @@
-package com.yyktools.test3;
+package com.yyktools.thrustcalc2;
 
 import org.junit.Test;
 import static org.junit.Assert.*;

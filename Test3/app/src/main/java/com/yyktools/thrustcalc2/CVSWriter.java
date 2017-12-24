@@ -1,14 +1,11 @@
-package com.yyktools.test3;
+package com.yyktools.thrustcalc2;
 
 /**
  * Created by y.kuznetsov on 12/21/2017.
  */
 
 import android.os.Environment;
-import android.provider.MediaStore;
-import android.util.Log;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
