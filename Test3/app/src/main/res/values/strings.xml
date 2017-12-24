@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Test3</string>
+    <string name="app_name">ThrustCalc</string>
     <string name="action_settings">Settings</string>
     <string name="computeTxt">COMPUTE</string>
     <string name="recordTxt">RECORD</string>

@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
         for (File f : files) {
             String fn = f.getName();
             if (fn.endsWith(".csv")) {
-                _lines.add(fn);
+                _lines.add(String.format("%s %d (bytes)", fn, f.length()));
             }
         }
 
