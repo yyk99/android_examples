@@ -60,6 +60,11 @@ public class MainActivity extends AppCompatActivity {
             this.startActivity(intent);
             return true;
         }
+        if(id == R.id.action_logrecord) {
+            android.content.Intent intent = new android.content.Intent(this, LogRecordsActivity.class);
+            this.startActivity(intent);
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }
