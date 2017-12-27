@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import android.widget.ListView;
 import android.widget.TextView;
 import java.io.File;
 
@@ -108,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void listButtonPressed(View v) {
         TextView txtView = (TextView) findViewById(R.id.textView);
+        ListView lstView = (ListView) findViewById(R.id.listView);
 
         if(!isExternalStorageReadable()) {
             /* permission will be requested */
@@ -124,6 +126,8 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         txtView.setText(buffer.toString());
+        TextView v1 = 
+        lstView.addView();
     }
 }
 
