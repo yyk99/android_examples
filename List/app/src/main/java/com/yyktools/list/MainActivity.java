@@ -13,11 +13,15 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import android.widget.ListView;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.ListView;
 import java.io.File;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    private ArrayList<String> _lines = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +56,13 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            android.content.Intent intent = new android.content.Intent(this, SettingsActivity.class);
+            this.startActivity(intent);
+            return true;
+        }
+        if(id == R.id.action_logrecord) {
+            android.content.Intent intent = new android.content.Intent(this, LogRecordsActivity.class);
+            this.startActivity(intent);
             return true;
         }
 
@@ -109,25 +120,26 @@ public class MainActivity extends AppCompatActivity {
 
     public void listButtonPressed(View v) {
         TextView txtView = (TextView) findViewById(R.id.textView);
-        ListView lstView = (ListView) findViewById(R.id.listView);
+        ListView listView = (ListView) findViewById(R.id.listView);
 
-        if(!isExternalStorageReadable()) {
+        if (!isExternalStorageReadable()) {
             /* permission will be requested */
             return;
         }
 
         File folder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-        String [] files = folder.list();
-        StringBuilder buffer = new StringBuilder();
-        for (String f : files) {
-            if(f.endsWith(".csv")) {
-                buffer.append(f);
-                buffer.append('\n');
+        File[] files = folder.listFiles();
+        _lines.clear();
+        for (File f : files) {
+            String fn = f.getName();
+            if (fn.endsWith(".csv")) {
+                _lines.add(String.format("%s %d (bytes)", fn, f.length()));
             }
         }
-        txtView.setText(buffer.toString());
-        TextView v1 = 
-        lstView.addView();
+
+        ArrayAdapter<String> adapter;
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, _lines);
+        listView.setAdapter(adapter);
     }
 }
 

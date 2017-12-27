@@ -12,7 +12,6 @@
         android:id="@+id/buttonList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
         android:layout_marginTop="8dp"
         android:onClick="listButtonPressed"
         android:text="@string/list_button"
@@ -22,8 +21,8 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="364dp"
-        android:layout_height="179dp"
+        android:layout_width="381dp"
+        android:layout_height="61dp"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,8 +30,8 @@
 
     <ListView
         android:id="@+id/listView"
-        android:layout_width="368dp"
-        android:layout_height="252dp"
+        android:layout_width="wrap_content"
+        android:layout_height="360dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
