@@ -1,6 +1,7 @@
 package com.yyktools.list;
 
 import android.graphics.Color;
+import android.os.Environment;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.ActionBar;
@@ -15,6 +16,10 @@ import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.io.File;
+import java.io.FileReader;
+import java.io.BufferedReader;
 
 public class LogRecordsActivity extends AppCompatActivity {
 
@@ -34,86 +39,68 @@ public class LogRecordsActivity extends AppCompatActivity {
         try {
             JSONArray jArray = new JSONArray();
             {
-                // TODO: read .CSV file
-                for(int i = 0 ; i != 4 ; ++i) {
-                    JSONObject o = new JSONObject();
-                    o.put("column1", i * 10 + 1);
-                    o.put("column2", i * 10 + 2);
-                    o.put("column3", i * 10 + 3);
+                if(false) {
+                    // TODO: read .CSV file
+                    for (int i = 0; i != 4; ++i) {
+                        JSONObject o = new JSONObject();
+                        o.put("column1", i * 10 + 1);
+                        o.put("column2", i * 10 + 2);
+                        o.put("column3", i * 10 + 3);
 
-                    jArray.put(o);
+                        jArray.put(o);
+                    }
+                } else {
+                    File f = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "thrust_hp.csv");
+                    BufferedReader br = new BufferedReader(new FileReader(f));
+
+                    String line;
+                    try {
+                        while ((line = br.readLine()) != null) {
+                            String[] words = line.split(",");
+                            jArray.put(new JSONArray(words));
+                        }
+                    } catch (java.io.IOException ex) {
+                        ; // TODO: react
+                        Toast.makeText(getApplicationContext(), "File read error", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
 
             TableLayout tv = (TableLayout) findViewById(R.id.log_records_table);
             tv.removeAllViewsInLayout();
-            int flag = 1;
 
             // when i=-1, loop will display heading of each column
             // then usually data will be display from i=0 to jArray.length()
-            for (int i = -1; i < jArray.length(); ++i) {
+            for (int i = 0; i < jArray.length(); ++i) {
 
                 TableRow tr = new TableRow(LogRecordsActivity.this);
-
                 tr.setLayoutParams(new LayoutParams(
                         LayoutParams.FILL_PARENT,
                         LayoutParams.WRAP_CONTENT));
 
                 // this will be executed once
-                if (flag == 1) {
-
-                    TextView b3 = new TextView(LogRecordsActivity.this);
-                    b3.setText("col1");
-                    b3.setTextColor(android.graphics.Color.BLUE);
-                    b3.setTextSize(15);
-                    tr.addView(b3);
-
-                    TextView b4 = new TextView(LogRecordsActivity.this);
-                    b4.setPadding(10, 0, 0, 0);
-                    b4.setTextSize(15);
-                    b4.setText("col2");
-                    b4.setTextColor(android.graphics.Color.BLUE);
-                    tr.addView(b4);
-
-                    TextView b5 = new TextView(LogRecordsActivity.this);
-                    b5.setPadding(10, 0, 0, 0);
-                    b5.setText("col3");
-                    b5.setTextColor(android.graphics.Color.BLUE);
-                    b5.setTextSize(15);
-                    tr.addView(b5);
+                if (i == 0) {
+                    for (int k = 0; k < jArray.getJSONArray(i).length(); ++k) {
+                        TextView b = new TextView(LogRecordsActivity.this);
+                        b.setText(jArray.getJSONArray(i).getString(k) + " ");
+                        b.setTextColor(android.graphics.Color.BLUE);
+                        b.setTextSize(15);
+                        tr.addView(b);
+                    }
                     tv.addView(tr);
 
                     final View vline = new View(LogRecordsActivity.this);
-                    vline.setLayoutParams(new
-                            TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, 2));
+                    vline.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, 2));
                     vline.setBackgroundColor(android.graphics.Color.BLUE);
                     tv.addView(vline); // add line below heading
-                    flag = 0;
                 } else {
-                    JSONObject json_data = jArray.getJSONObject(i);
-
-                    TextView b = new TextView(LogRecordsActivity.this);
-                    String str = String.valueOf(json_data.getInt("column1"));
-                    b.setText(str);
-                    b.setTextColor(Color.RED);
-                    b.setTextSize(15);
-                    tr.addView(b);
-
-                    TextView b1 = new TextView(LogRecordsActivity.this);
-                    b1.setPadding(10, 0, 0, 0);
-                    b1.setTextSize(15);
-                    String str1 = json_data.getString("column2");
-                    b1.setText(str1);
-                    b1.setTextColor(Color.GREEN);
-                    tr.addView(b1);
-
-                    TextView b2 = new TextView(LogRecordsActivity.this);
-                    b2.setPadding(10, 0, 0, 0);
-                    String str2 = String.valueOf(json_data.getInt("column3"));
-                    b2.setText(str2);
-                    b2.setTextColor(Color.RED);
-                    b2.setTextSize(15);
-                    tr.addView(b2);
+                    for (int k = 0; k < jArray.getJSONArray(i).length(); ++k) {
+                        TextView b = new TextView(LogRecordsActivity.this);
+                        b.setText(jArray.getJSONArray(i).getString(k) + " ");
+                        b.setTextColor(android.graphics.Color.BLUE);
+                        b.setTextSize(15);
+                        tr.addView(b);
+                    }
                     tv.addView(tr);
                     final View vline1 = new View(LogRecordsActivity.this);
                     vline1.setLayoutParams(new
@@ -125,6 +112,8 @@ public class LogRecordsActivity extends AppCompatActivity {
         } catch (org.json.JSONException e) {
             android.util.Log.e("log_tag", "Error parsing data " + e.toString());
             Toast.makeText(getApplicationContext(), "JsonArray fail", Toast.LENGTH_SHORT).show();
+        } catch (java.io.FileNotFoundException e) {
+            Toast.makeText(getApplicationContext(), "File not found", Toast.LENGTH_SHORT).show();
         }
     }
 
