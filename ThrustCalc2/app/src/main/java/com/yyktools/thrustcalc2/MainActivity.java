@@ -14,6 +14,7 @@ import android.view.MenuItem;
 
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Date;
 import java.util.Locale;
@@ -106,6 +107,10 @@ public class MainActivity extends AppCompatActivity {
 
         hpOutW.setText(R.string.about_text);
         loadOutW.setText(R.string.version_text);
+
+        String version_mess = String.format("%s %s",
+                getString(R.string.about_text), getString(R.string.version_text));
+        Toast.makeText(getApplicationContext(), version_mess, Toast.LENGTH_SHORT).show();
     }
 
     public void computeButtonPressed(View v) {
