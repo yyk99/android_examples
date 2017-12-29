@@ -63,6 +63,12 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
+        if (id == R.id.action_showlog) {
+            // start log browser
+            android.content.Intent intent = new android.content.Intent(this, LogBrowserActivity.class);
+            this.startActivity(intent);
+        }
+
         return super.onOptionsItemSelected(item);
     }
 

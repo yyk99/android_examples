@@ -10,4 +10,5 @@
     <string name="pitch_hint">Pitch (in.)</string>
     <string name="rpm_hint">RPM</string>
     <string name="number_of_blades_hint">Number of blades (2)</string>
+    <string name="action_showlog">Show Log</string>
 </resources>
