@@ -27,9 +27,25 @@ public class ThrustCalculatorUnitTest {
         assertEquals(3.962, tc.getThrust(), 1E-5);
     }
 
-    @Test (expected = RuntimeException.class)
+    @Test(expected = RuntimeException.class)
     public void calculate_isCorrect2() throws Exception {
         ThrustCalculator tc = new ThrustCalculator();
         tc.calculate(10, 6, 10000, 1);
+    }
+
+    @Test
+    public void formatter_Test() {
+        {
+            String s = String.format("%g", 10.0);
+            assertEquals("10.0000", s);
+        }
+        {
+            String s = String.format("%.1f", 10.0);
+            assertEquals("10.0", s);
+        }
+        {
+            String s = String.format("%d", (int)10.5);
+            assertEquals("10", s);
+        }
     }
 }
