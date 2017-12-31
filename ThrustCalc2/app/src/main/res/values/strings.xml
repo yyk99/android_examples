@@ -5,7 +5,7 @@
     <string name="recordTxt">RECORD</string>
     <string name="aboutTxt">About</string>
     <string name="about_text" translatable="false">Version:</string>
-    <string name="version_text" translatable="false">2017.12.29.01</string>
+    <string name="version_text" translatable="false">2017.12.30.01</string>
     <string name="diameter_hint">Diameter (in)</string>
     <string name="pitch_hint">Pitch (in.)</string>
     <string name="rpm_hint">RPM</string>

@@ -1,20 +1,49 @@
 package com.yyktools.thrustcalc2;
 
+import android.content.Context;
+import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Environment;
+import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONArray;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
+
+class SmartAdapter extends ArrayAdapter<String> {
+    public  SmartAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull ArrayList<String> objects) {
+        super(context, resource, objects);
+    }
+
+    @Override
+    public @NonNull
+    View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        TextView textview = (TextView)super.getView(position, convertView, parent);
+
+        if (position % 4 == 0) {
+            textview.setTypeface(textview.getTypeface(), Typeface.BOLD);
+            Drawable d = getContext().getResources().getDrawable(R.drawable.rounded_corners, null);
+            textview.setBackground(d);
+        } else {
+            textview.setTypeface(Typeface.DEFAULT);
+            textview.setBackgroundResource(android.R.color.white);
+        }
+
+        return  textview;
+    }
+}
 
 public class LogBrowserActivity extends AppCompatActivity {
 
@@ -36,6 +65,12 @@ public class LogBrowserActivity extends AppCompatActivity {
         super.onResume();
 
         showLogRecords();
+    }
+
+    static String G(double f)
+    {
+        int h = (int)f;
+        return (h != f ? String.format("%.1f", f) : String.format("%d", h));
     }
 
     void showLogRecords()
@@ -61,10 +96,12 @@ public class LogBrowserActivity extends AppCompatActivity {
                     double pitch = Double.parseDouble(words[2]);
                     double rpm = Double.parseDouble(words[3]);
                     int blades = Integer.parseInt(words[4]);
-                    _lines.add(String.format("Prop: %.1fx%.1f, %d at %.1f", diam, pitch, blades, rpm));
-                    _lines.add("Power(hp): " + words[5] + ", Thrust(lbs): " + words[6]);
-                    _lines.add("Speed(mph): " + words[7]);
-                    _lines.add(" ");
+                    _lines.add(String.format("Prop: %sx%s, %d at %d", G(diam), G(pitch), blades, (int)rpm));
+                    double power = Double.parseDouble(words[5]);
+                    double thrust = Double.parseDouble(words[6]);
+                    double speed = Double.parseDouble(words[7]);
+                    _lines.add(String.format("Power: %.2fhp, Thrust: %.2f(lbs)", power, thrust));
+                    _lines.add(String.format("Speed: %.1fmph", speed));
                 }
             } catch (java.io.IOException ex) {
                 ; // TODO: react
@@ -72,7 +109,8 @@ public class LogBrowserActivity extends AppCompatActivity {
             }
 
             ArrayAdapter<String> adapter;
-            adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, _lines);
+//            adapter = new SmartAdapter(this, android.R.layout.simple_list_item_1, _lines);
+            adapter = new SmartAdapter(this, R.layout.textview_yyk, _lines);
             listView.setAdapter(adapter);
         }catch(java.io.FileNotFoundException ex) {
             Toast.makeText(getApplicationContext(), ex.getMessage(), Toast.LENGTH_SHORT).show();
