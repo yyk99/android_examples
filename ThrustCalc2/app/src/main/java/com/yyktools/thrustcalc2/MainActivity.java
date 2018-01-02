@@ -43,6 +43,35 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        /* restore */
+        if(savedInstanceState != null) {
+            _diam = savedInstanceState.getDouble("_diam");
+            _pitch = savedInstanceState.getDouble("_pitch");
+            _rpm = savedInstanceState.getDouble("_rpm");
+            _nBlades = savedInstanceState.getInt("_nBlades");
+        }
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        if(savedInstanceState != null) {
+            _diam = savedInstanceState.getDouble("_diam");
+            _pitch = savedInstanceState.getDouble("_pitch");
+            _rpm = savedInstanceState.getDouble("_rpm");
+            _nBlades = savedInstanceState.getInt("_nBlades");
+        }
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState){
+        super.onSaveInstanceState(outState);
+
+        outState.putDouble("_diam", _diam);
+        outState.putDouble("_pitch", _pitch);
+        outState.putDouble("_rpm", _rpm);
+        outState.putInt("_nBlades", _nBlades);
     }
 
     @Override
@@ -94,6 +123,30 @@ public class MainActivity extends AppCompatActivity {
             // other 'case' lines to check for other
             // permissions this app might request
         }
+    }
+
+//    @Override
+//    public void onResume()
+//    {
+//        super.onResume();
+//
+//        EditText diamW = (EditText) findViewById(R.id.editDiam); /* D */
+//        EditText pitchW = (EditText) findViewById(R.id.editPitch);   /* E */
+//        EditText rpmW = (EditText) findViewById(R.id.editRPM);       /* F */
+//        EditText bladesW = (EditText) findViewById(R.id.editBlades); /* G */
+//
+//        TextView hpOutW = (TextView) findViewById(R.id.textOut1);
+//        TextView loadOutW = (TextView) findViewById(R.id.textOut2);
+//
+//        if (_diam != 0) {
+//            diamW.setText(G(_diam), TextView.BufferType.EDITABLE);
+//        }
+//    }
+
+    static String G(double f)
+    {
+        int h = (int)f;
+        return (h != f ? String.format("%.1f", f) : String.format("%d", h));
     }
 
     public String TXT(int id)
@@ -215,11 +268,9 @@ public class MainActivity extends AppCompatActivity {
         );
         boolean ok = log.writeLine(log_line);
         if(!ok) {
-            hpOutW.setText(String.format(Locale.US,"...failed"));
-            loadOutW.setText(String.format(Locale.US,"...error..."));
+            Toast.makeText(getApplicationContext(), "FAILED to save", Toast.LENGTH_SHORT).show();
         } else {
-            hpOutW.setText(String.format(Locale.US,"...saved"));
-            loadOutW.setText(String.format(Locale.US,"...in log file"));
+            Toast.makeText(getApplicationContext(), "Saved in log file...", Toast.LENGTH_SHORT).show();
         }
     }
 

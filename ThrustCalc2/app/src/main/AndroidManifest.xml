@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <!-- added android:launchMode="singleTop" to avoid re-creating the main activity and preserve the main activity state -->
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
