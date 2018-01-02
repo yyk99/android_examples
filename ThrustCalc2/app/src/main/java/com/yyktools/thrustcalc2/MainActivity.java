@@ -31,6 +31,11 @@ public class MainActivity extends AppCompatActivity {
     public final static int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 42;
     public static final String VARIABLE_PREFS_NAME = "VARIABLES";
 
+    public static final String K_DIAM = "_diam";
+    public static final String K_PITCH = "_pitch";
+    public static final String K_RPM = "_rpm";
+    public static final String K_NBLADES = "_nBlades";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,15 +54,15 @@ public class MainActivity extends AppCompatActivity {
 
         if(savedInstanceState == null) {
             SharedPreferences settings = getSharedPreferences(VARIABLE_PREFS_NAME, 0);
-            _diam = settings.getFloat("_diam", 0);
-            _pitch = settings.getFloat("_pitch", 0);
-            _rpm = settings.getFloat("_prm", 0);
-            _nBlades = settings.getInt("_nBlades", 0);
+            _diam = settings.getFloat(K_DIAM, 0);
+            _pitch = settings.getFloat(K_PITCH, 0);
+            _rpm = settings.getFloat(K_RPM, 0);
+            _nBlades = settings.getInt(K_NBLADES, 0);
         } else {
-            _diam = savedInstanceState.getDouble("_diam", 0);
-            _pitch = savedInstanceState.getDouble("_pitch", 0);
-            _rpm = savedInstanceState.getDouble("_rpm", 0);
-            _nBlades = savedInstanceState.getInt("_nBlades", 0);
+            _diam = savedInstanceState.getDouble(K_DIAM, 0);
+            _pitch = savedInstanceState.getDouble(K_PITCH, 0);
+            _rpm = savedInstanceState.getDouble(K_RPM, 0);
+            _nBlades = savedInstanceState.getInt(K_NBLADES, 0);
         }
         if(_diam != 0) {
             EditText diamW = (EditText) findViewById(R.id.editDiam); /* D */
@@ -77,17 +82,17 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
 
         if(_diam != 0) {
-            outState.putDouble("_diam", _diam);
-            outState.putDouble("_pitch", _pitch);
-            outState.putDouble("_rpm", _rpm);
-            outState.putInt("_nBlades", _nBlades);
+            outState.putDouble(K_DIAM, _diam);
+            outState.putDouble(K_PITCH, _pitch);
+            outState.putDouble(K_RPM, _rpm);
+            outState.putInt(K_NBLADES, _nBlades);
 
             SharedPreferences settings = getSharedPreferences(VARIABLE_PREFS_NAME, 0);
             SharedPreferences.Editor editor = settings.edit();
-            editor.putFloat("_diam", (float)_diam);
-            editor.putFloat("_pitch", (float)_pitch);
-            editor.putFloat("_prm", (float)_rpm);
-            editor.putInt("_nBlades", _nBlades);
+            editor.putFloat(K_DIAM, (float)_diam);
+            editor.putFloat(K_PITCH, (float)_pitch);
+            editor.putFloat(K_RPM, (float)_rpm);
+            editor.putInt(K_NBLADES, _nBlades);
             editor.commit();
         }
     }
