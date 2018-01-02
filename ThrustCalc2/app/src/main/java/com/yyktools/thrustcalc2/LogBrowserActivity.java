@@ -57,14 +57,22 @@ public class LogBrowserActivity extends AppCompatActivity {
             // Show the Up button in the action bar.
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+
+        showLogRecords();
+        if(savedInstanceState != null) {
+            int pos = savedInstanceState.getInt("firstVisiblePosition");
+            ListView listView = (ListView) findViewById(R.id.logList);
+            listView.setSelection(pos);
+        }
     }
 
     @Override
-    public void onResume()
+    public void onSaveInstanceState(Bundle out)
     {
-        super.onResume();
-
-        showLogRecords();
+        super.onSaveInstanceState(out);
+        ListView listView = (ListView) findViewById(R.id.logList);
+        int pos = listView.getFirstVisiblePosition();
+        out.putInt("firstVisiblePosition", pos);
     }
 
     static String G(double f)
