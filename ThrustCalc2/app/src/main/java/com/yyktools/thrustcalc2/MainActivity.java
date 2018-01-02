@@ -3,6 +3,7 @@ package com.yyktools.thrustcalc2;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -53,7 +54,10 @@ public class MainActivity extends AppCompatActivity {
             _rpm = settings.getFloat("_prm", 0);
             _nBlades = settings.getInt("_nBlades", 0);
         } else {
-            // TODO: restore from bundle
+            _diam = savedInstanceState.getDouble("_diam", 0);
+            _pitch = savedInstanceState.getDouble("_pitch", 0);
+            _rpm = savedInstanceState.getDouble("_rpm", 0);
+            _nBlades = savedInstanceState.getInt("_nBlades", 0);
         }
         if(_diam != 0) {
             EditText diamW = (EditText) findViewById(R.id.editDiam); /* D */
@@ -64,15 +68,20 @@ public class MainActivity extends AppCompatActivity {
             diamW.setText(G(_diam), TextView.BufferType.EDITABLE);
             pitchW.setText(G(_pitch), TextView.BufferType.EDITABLE);
             rpmW.setText(G(_rpm), TextView.BufferType.EDITABLE);
-            bladesW.setText(String.format("%d", _nBlades), TextView.BufferType.EDITABLE);
+            bladesW.setText(String.format(Locale.US,"%d", _nBlades), TextView.BufferType.EDITABLE);
         }
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
 
         if(_diam != 0) {
+            outState.putDouble("_diam", _diam);
+            outState.putDouble("_pitch", _pitch);
+            outState.putDouble("_rpm", _rpm);
+            outState.putInt("_nBlades", _nBlades);
+
             SharedPreferences settings = getSharedPreferences(VARIABLE_PREFS_NAME, 0);
             SharedPreferences.Editor editor = settings.edit();
             editor.putFloat("_diam", (float)_diam);
@@ -82,6 +91,21 @@ public class MainActivity extends AppCompatActivity {
             editor.commit();
         }
     }
+
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+//
+//        if(_diam != 0) {
+//            SharedPreferences settings = getSharedPreferences(VARIABLE_PREFS_NAME, 0);
+//            SharedPreferences.Editor editor = settings.edit();
+//            editor.putFloat("_diam", (float)_diam);
+//            editor.putFloat("_pitch", (float)_pitch);
+//            editor.putFloat("_prm", (float)_rpm);
+//            editor.putInt("_nBlades", _nBlades);
+//            editor.commit();
+//        }
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -112,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE: {
                 // If request is cancelled, the result arrays are empty.
