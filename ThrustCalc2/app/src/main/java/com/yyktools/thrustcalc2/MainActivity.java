@@ -1,5 +1,6 @@
 package com.yyktools.thrustcalc2;
 
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private double _load, _hp, _thrust, _speed;
 
     public final static int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 42;
+    public static final String VARIABLE_PREFS_NAME = "VARIABLES";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,42 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        if(savedInstanceState == null) {
+            SharedPreferences settings = getSharedPreferences(VARIABLE_PREFS_NAME, 0);
+            _diam = settings.getFloat("_diam", 0);
+            _pitch = settings.getFloat("_pitch", 0);
+            _rpm = settings.getFloat("_prm", 0);
+            _nBlades = settings.getInt("_nBlades", 0);
+        } else {
+            // TODO: restore from bundle
+        }
+        if(_diam != 0) {
+            EditText diamW = (EditText) findViewById(R.id.editDiam); /* D */
+            EditText pitchW = (EditText) findViewById(R.id.editPitch);   /* E */
+            EditText rpmW = (EditText) findViewById(R.id.editRPM);       /* F */
+            EditText bladesW = (EditText) findViewById(R.id.editBlades); /* G */
+
+            diamW.setText(G(_diam), TextView.BufferType.EDITABLE);
+            pitchW.setText(G(_pitch), TextView.BufferType.EDITABLE);
+            rpmW.setText(G(_rpm), TextView.BufferType.EDITABLE);
+            bladesW.setText(String.format("%d", _nBlades), TextView.BufferType.EDITABLE);
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        if(_diam != 0) {
+            SharedPreferences settings = getSharedPreferences(VARIABLE_PREFS_NAME, 0);
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putFloat("_diam", (float)_diam);
+            editor.putFloat("_pitch", (float)_pitch);
+            editor.putFloat("_prm", (float)_rpm);
+            editor.putInt("_nBlades", _nBlades);
+            editor.commit();
+        }
     }
 
     @Override
@@ -94,6 +132,12 @@ public class MainActivity extends AppCompatActivity {
             // other 'case' lines to check for other
             // permissions this app might request
         }
+    }
+
+    static String G(double f)
+    {
+        int h = (int)f;
+        return (h != f ? String.format("%.1f", f) : String.format("%d", h));
     }
 
     public String TXT(int id)
